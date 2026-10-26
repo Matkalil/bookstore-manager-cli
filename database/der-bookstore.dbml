@@ -1,0 +1,40 @@
+Table autores {
+  id serial [pk]
+  nome varchar(150) [not null]
+  data_nascimento date [not null, check: `data_nascimento < CURRENT_DATE`]
+  pais_nascimento varchar(80)
+}
+
+Table livros {
+  id serial [pk]
+  titulo varchar(200) [not null]
+  isbn varchar(20) [not null, unique]
+  ano_publicacao integer [check: `ano_publicacao > 0`]
+  quantidade_total integer [not null, check: `quantidade_total >= 0`]
+  quantidade_disponivel integer [not null, check: `quantidade_disponivel >= 0`]
+  autor_id integer [not null, ref: > autores.id]
+
+  checks {
+    `quantidade_disponivel <= quantidade_total` [name: 'chk_disponivel_ate_total']
+  }
+}
+
+Table clientes {
+  id serial [pk]
+  nome varchar(150) [not null]
+  email varchar(150) [not null, unique]
+  cpf char(11) [not null, unique]
+  telefone varchar(20) [not null]
+}
+
+Table emprestimos {
+  id serial [pk]
+  livro_id integer [not null, ref: > livros.id]
+  cliente_id integer [not null, ref: > clientes.id]
+  data_emprestimo date [not null, default: `CURRENT_DATE`]
+  data_devolucao date [null]
+
+  checks {
+    `data_devolucao >= data_emprestimo` [name: 'chk_devolucao_apos_emprestimo']
+  }
+}
