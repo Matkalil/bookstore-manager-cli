@@ -1,5 +1,5 @@
-import * as readline from "node:readline/promises";
-import { stdin as input, stdout as output } from "node:process";
+import * as readline from 'node:readline/promises';
+import { stdin as input, stdout as output } from 'node:process';
 
 const leitor = readline.createInterface({ input, output });
 
@@ -13,14 +13,19 @@ export async function perguntarNumero(mensagem: string): Promise<number> {
     const resposta = await perguntar(mensagem);
     const numero = Number(resposta);
 
-    if (resposta !== "" && Number.isInteger(numero)) {
+    if (resposta !== '' && Number.isInteger(numero)) {
       return numero;
     }
 
-    console.log("[ERRO] Digite um número inteiro válido.");
+    console.log('[ERRO] Digite um número inteiro válido.');
   }
 }
 
 export function fecharTerminal(): void {
   leitor.close();
+}
+
+export function exibirErro(erro: unknown): void {
+  const mensagem = erro instanceof Error ? erro.message : 'Ocorreu um erro inesperado.';
+  console.log(`[ERRO] ${mensagem}`);
 }

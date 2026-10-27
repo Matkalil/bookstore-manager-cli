@@ -78,7 +78,7 @@ export class AutorController {
     }
   }
 
-  public async rmeover(): Promise<void> {
+  public async remover(): Promise<void> {
     try {
       const id = await perguntarNumero('ID do autor: ');
       await this.autorService.remover(id);
