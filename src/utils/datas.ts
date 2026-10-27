@@ -1,9 +1,9 @@
 export function formatarData(data: Date): string {
-  return data.toLocaleDateString("pt-BR");
+  return data.toLocaleDateString('pt-BR');
 }
 
 export function converterTextoParaData(texto: string): Date | null {
-  const partes = texto.split("/");
+  const partes = texto.split('/');
 
   if (partes.length !== 3) {
     return null;
