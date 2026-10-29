@@ -1,7 +1,13 @@
-import { autoresSeed, livrosSeed, clientesSeed } from './data/seed';
+import {
+  autoresSeed,
+  livrosSeed,
+  clientesSeed,
+  emprestimosSeed,
+} from './data/seed';
 import { AutorRepository } from './repositories/AutorRepository';
 import { LivroRepository } from './repositories/LivroRepository';
 import { ClienteRepository } from './repositories/ClienteRepository';
+import { EmprestimoRepository } from './repositories/EmprestimoRepository';
 import { AutorService } from './services/AutorService';
 import { LivroService } from './services/LivroService';
 import { ClienteService } from './services/ClienteService';
@@ -18,10 +24,18 @@ async function main(): Promise<void> {
   const autorRepository = new AutorRepository(autoresSeed);
   const livroRepository = new LivroRepository(livrosSeed);
   const clienteRepository = new ClienteRepository(clientesSeed);
+  const emprestimoRepository = new EmprestimoRepository(emprestimosSeed);
 
   const autorService = new AutorService(autorRepository, livroRepository);
-  const livroService = new LivroService(livroRepository, autorService);
-  const clienteService = new ClienteService(clienteRepository);
+  const livroService = new LivroService(
+    livroRepository,
+    autorService,
+    emprestimoRepository,
+  );
+  const clienteService = new ClienteService(
+    clienteRepository,
+    emprestimoRepository,
+  );
 
   const autorController = new AutorController(autorService);
   const livroController = new LivroController(livroService);
