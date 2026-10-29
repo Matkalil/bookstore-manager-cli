@@ -123,7 +123,7 @@ export class LivroService {
 
     if (!livro.estaDisponivel()) {
       throw new Error(
-        `O livro ${livro.titulo} não possui exemplar disponível.`,
+        `O livro "${livro.titulo}" não possui exemplares disponíveis.`,
       );
     }
 

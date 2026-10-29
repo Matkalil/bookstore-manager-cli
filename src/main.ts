@@ -11,13 +11,16 @@ import { EmprestimoRepository } from './repositories/EmprestimoRepository';
 import { AutorService } from './services/AutorService';
 import { LivroService } from './services/LivroService';
 import { ClienteService } from './services/ClienteService';
+import { EmprestimoService } from './services/EmprestimoService';
 import { AutorController } from './controllers/AutorController';
 import { LivroController } from './controllers/LivroController';
 import { ClienteController } from './controllers/ClienteController';
+import { EmprestimoController } from './controllers/EmprestimoController';
 import { executarMenu } from './menus/executarMenu';
 import { exibirMenuAutores } from './menus/menuAutores';
 import { exibirMenuLivros } from './menus/menuLivros';
 import { exibirMenuClientes } from './menus/menuClientes';
+import { exibirMenuEmprestimos } from './menus/menuEmprestimos';
 import { exibirErro, fecharTerminal } from './utils/terminal';
 
 async function main(): Promise<void> {
@@ -36,10 +39,16 @@ async function main(): Promise<void> {
     clienteRepository,
     emprestimoRepository,
   );
+  const emprestimoService = new EmprestimoService(
+    emprestimoRepository,
+    livroService,
+    clienteService,
+  );
 
   const autorController = new AutorController(autorService);
   const livroController = new LivroController(livroService);
   const clienteController = new ClienteController(clienteService);
+  const emprestimoController = new EmprestimoController(emprestimoService);
 
   console.log('Bem-vindo ao BookStore Manager CLI!');
 
@@ -51,6 +60,10 @@ async function main(): Promise<void> {
       {
         descricao: 'Clientes',
         acao: () => exibirMenuClientes(clienteController),
+      },
+      {
+        descricao: 'Empréstimos',
+        acao: () => exibirMenuEmprestimos(emprestimoController),
       },
     ],
     'Encerrar aplicação',
