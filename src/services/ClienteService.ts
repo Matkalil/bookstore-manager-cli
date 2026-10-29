@@ -1,12 +1,18 @@
 import { Cliente } from '../models/Cliente';
 import { ClienteRepository } from '../repositories/ClienteRepository';
+import { EmprestimoRepository } from '../repositories/EmprestimoRepository';
 import { cpfValido, emailValido, textoPreenchido } from '../utils/validacoes';
 
 export class ClienteService {
   private clienteRepository: ClienteRepository;
+  private emprestimoRepository: EmprestimoRepository;
 
-  constructor(clienteRepository: ClienteRepository) {
+  constructor(
+    clienteRepository: ClienteRepository,
+    emprestimoRepository: EmprestimoRepository,
+  ) {
     this.clienteRepository = clienteRepository;
+    this.emprestimoRepository = emprestimoRepository;
   }
 
   public async cadastrar(
@@ -55,6 +61,19 @@ export class ClienteService {
 
   public async remover(id: number): Promise<void> {
     await this.buscarPorId(id);
+    await this.clienteRepository.remover(id);
+
+    const emprestimos = await this.emprestimoRepository.listar();
+    const possuiEmprestimos = emprestimos.some(
+      (emprestimo) => emprestimo.clienteId === id,
+    );
+
+    if (possuiEmprestimos) {
+      throw new Error(
+        'Não é possível remover o cliente: existem empréstimos registrados para ele.',
+      );
+    }
+
     await this.clienteRepository.remover(id);
   }
 

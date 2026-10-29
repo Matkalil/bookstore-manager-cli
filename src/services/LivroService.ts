@@ -1,5 +1,6 @@
 import { Livro } from '../models/Livro';
 import { LivroRepository } from '../repositories/LivroRepository';
+import { EmprestimoRepository } from '../repositories/EmprestimoRepository';
 import {
   anoValido,
   quantidadeValida,
@@ -10,10 +11,16 @@ import { AutorService } from './AutorService';
 export class LivroService {
   private livroRepository: LivroRepository;
   private autorService: AutorService;
+  private emprestimoRepository: EmprestimoRepository;
 
-  constructor(livroRepository: LivroRepository, autorService: AutorService) {
+  constructor(
+    livroRepository: LivroRepository,
+    autorService: AutorService,
+    emprestimoRepository: EmprestimoRepository,
+  ) {
     this.livroRepository = livroRepository;
     this.autorService = autorService;
+    this.emprestimoRepository = emprestimoRepository;
   }
 
   public async cadastrar(
@@ -96,7 +103,39 @@ export class LivroService {
 
   public async remover(id: number): Promise<void> {
     await this.buscarPorId(id);
+
+    const emprestimos = await this.emprestimoRepository.listar();
+    const possuiEmprestimos = emprestimos.some(
+      (emprestimo) => emprestimo.livroId === id,
+    );
+
+    if (possuiEmprestimos) {
+      throw new Error(
+        'Não é possível remover o livro: existem empréstimos registrados para ele.',
+      );
+    }
+
     await this.livroRepository.remover(id);
+  }
+
+  public async emprestarExemplar(livroId: number): Promise<void> {
+    const livro = await this.buscarPorId(livroId);
+
+    if (!livro.estaDisponivel()) {
+      throw new Error(
+        `O livro "${livro.titulo}" não possui exemplares disponíveis.`,
+      );
+    }
+
+    livro.quantidadeDisponivel--;
+    await this.livroRepository.salvar(livro);
+  }
+
+  public async devolverExemplar(livroId: number): Promise<void> {
+    const livro = await this.buscarPorId(livroId);
+
+    livro.quantidadeDisponivel++;
+    await this.livroRepository.salvar(livro);
   }
 
   private async validarDados(
