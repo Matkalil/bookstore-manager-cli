@@ -1,4 +1,4 @@
-import { AutorController } from "../controller/AutorController";
+import { AutorController } from "../controllers/AutorController";
 import { executarMenu } from './executarMenu';
 
 export async function exibirMenuAutores(autorController: AutorController): Promise<void> {

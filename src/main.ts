@@ -3,9 +3,11 @@ import { AutorRepository } from './repositories/AutorRepository';
 import { LivroRepository } from './repositories/LivroRepository';
 import { AutorService } from './services/AutorService';
 import { LivroService } from './services/LivroService';
-import { AutorController } from './controller/AutorController';
+import { AutorController } from './controllers/AutorController';
+import { LivroController } from './controllers/LivroController';
 import { executarMenu } from './menus/executarMenu';
 import { exibirMenuAutores } from './menus/menuAutores';
+import { exibirMenuLivros } from './menus/menuLivros';
 import { exibirErro, fecharTerminal } from './utils/terminal';
 
 async function main(): Promise<void> {
@@ -16,12 +18,16 @@ async function main(): Promise<void> {
   const livroService = new LivroService(livroRepository, autorService);
 
   const autorController = new AutorController(autorService);
+  const livroController = new LivroController(livroService);
 
   console.log('Bem-vindo ao BookStore Manager CLI!');
 
   await executarMenu(
     'MENU PRINCIPAL',
-    [{ descricao: 'Autores', acao: () => exibirMenuAutores(autorController) }],
+    [
+      { descricao: 'Autores', acao: () => exibirMenuAutores(autorController) },
+      { descricao: 'Livros', acao: () => exibirMenuLivros(livroController) },
+    ],
     'Encerrar aplicação',
   );
 

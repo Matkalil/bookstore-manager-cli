@@ -36,7 +36,7 @@ CREATE TABLE livros (
     ano_publicacao INTEGER
             CHECK (ano_publicacao > 0),
     quantidade_total INTEGER NOT NULL
-            CHECK (quantidade_total >= 0),
+            CHECK (quantidade_total > 0),
     quantidade_disponivel INTEGER NOT NULL
             CHECK (quantidade_disponivel >= 0),
     autor_id INTEGER NOT NULL

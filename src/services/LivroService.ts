@@ -117,9 +117,9 @@ export class LivroService {
 
     await this.validarIsbnUnico(isbn, idAtual);
 
-    if (!quantidadeValida(quantidadeTotal)) {
+    if (!quantidadeValida(quantidadeTotal) || quantidadeTotal < 1) {
       throw new Error(
-        'A quantidade total deve ser um número inteiro maior ou igual a zero.',
+        'A quantidade total deve ser um número inteiro maior que zero.',
       );
     }
 
