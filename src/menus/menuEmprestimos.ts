@@ -16,7 +16,7 @@ export async function exibirMenuEmprestimos(
         acao: () => emprestimoController.registrarDevolucao(),
       },
       {
-        descricao: 'Listar empréstimo',
+        descricao: 'Listar empréstimos',
         acao: () => emprestimoController.listar(),
       },
       {

@@ -61,7 +61,6 @@ export class ClienteService {
 
   public async remover(id: number): Promise<void> {
     await this.buscarPorId(id);
-    await this.clienteRepository.remover(id);
 
     const emprestimos = await this.emprestimoRepository.listar();
     const possuiEmprestimos = emprestimos.some(
