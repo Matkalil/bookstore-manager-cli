@@ -1,0 +1,29 @@
+{
+  "name": "bookstore-manager-cli",
+  "version": "1.0.0",
+  "description": "Sistema CLI para gerenciamento de livraria em Node.js e TypeScript",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "tsx src/main.ts",
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "typecheck": "tsc --noEmit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matkalil/bookstore-manager-cli.git"
+  },
+  "keywords": [],
+  "author": "Mateus Kuhnen Kalil",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Matkalil/bookstore-manager-cli/issues"
+  },
+  "homepage": "https://github.com/Matkalil/bookstore-manager-cli#readme",
+  "devDependencies": {
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}
