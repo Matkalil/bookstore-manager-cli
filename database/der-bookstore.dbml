@@ -10,7 +10,7 @@ Table livros {
   titulo varchar(200) [not null]
   isbn varchar(20) [not null, unique]
   ano_publicacao integer [check: `ano_publicacao > 0`]
-  quantidade_total integer [not null, check: `quantidade_total >= 0`]
+  quantidade_total integer [not null, check: `quantidade_total > 0`]
   quantidade_disponivel integer [not null, check: `quantidade_disponivel >= 0`]
   autor_id integer [not null, ref: > autores.id]
 

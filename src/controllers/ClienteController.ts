@@ -58,9 +58,9 @@ export class ClienteController {
       const id = await perguntarNumero('ID do cliente: ');
       const nome = await perguntar('Novo nome: ');
       const email = await perguntar('Novo e-mail: ');
-      const cpf = await perguntar('Novo CPF: ');
+      const cpf = await perguntar('Novo CPF (somente números): ');
       const telefone = await perguntar(
-        'Novo telefone (exemplo: (48) 9999-9999): ',
+        'Novo telefone (ex: (48) 9999-9999): ',
       );
 
       const cliente = await this.clienteService.atualizar(
