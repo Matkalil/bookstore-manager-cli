@@ -94,22 +94,22 @@ INSERT INTO emprestimos (livro_id, cliente_id, data_emprestimo, data_devolucao) 
         (3, 3, '2026-10-14', '2026-10-20'),
         (8, 4, '2026-10-18', NULL);
 
---Exemplo UPDATE: Atualiza telefone da cliente Celeste
-UPDATE clientes SET telefone = '(48) 99101-0007' WHERE id = 3;
+-- Exemplo UPDATE: Atualiza telefone da cliente Celeste
+UPDATE clientes SET telefone = '(48) 99101-0007' WHERE id = 5;
 --Exemplo DELETE: Deleta cliente Benedito. Cliente sem empréstimos, não interrompe script
 DELETE FROM clientes WHERE id = 6;
 
 -- =============================================
 -- 3. Relatórios
 -- =============================================
---Relatório 1: livros disponíveis
+-- Relatório 1: livros disponíveis
 SELECT livros.titulo AS titulo, autores.nome AS autor, livros.quantidade_disponivel AS livros_disponiveis
 FROM livros
 INNER JOIN autores ON livros.autor_id = autores.id
 WHERE livros.quantidade_disponivel > 0
-ORDER BY titulo DESC;
+ORDER BY titulo ASC;
 
---Relatório 2: livros emprestados
+-- Relatório 2: livros emprestados
 SELECT livros.titulo AS titulo, clientes.nome AS cliente, emprestimos.data_emprestimo AS data_emprestimo
 FROM emprestimos
 INNER JOIN livros ON emprestimos.livro_id = livros.id
@@ -117,14 +117,14 @@ INNER JOIN clientes ON emprestimos.cliente_id = clientes.id
 WHERE emprestimos.data_devolucao IS NULL
 ORDER BY emprestimos.data_emprestimo ASC;
 
---Relatório 3: livros cadastrados por autor
+-- Relatório 3: livros cadastrados por autor
 SELECT autores.nome AS autor, COUNT(livros.id) AS total_livros
 FROM autores
 LEFT JOIN livros ON livros.autor_id = autores.id
 GROUP BY autores.id, autores.nome
 ORDER BY total_livros DESC, autores.nome ASC; 
 
---Relatório 4: quantidade de empréstimos por livro
+-- Relatório 4: quantidade de empréstimos por livro
 SELECT livros.titulo AS titulo, COUNT(emprestimos.id) AS total_emprestimos
 FROM livros
 LEFT JOIN emprestimos ON emprestimos.livro_id = livros.id
@@ -132,7 +132,7 @@ GROUP BY livros.id, livros.titulo
 ORDER BY total_emprestimos DESC, livros.titulo ASC
 LIMIT 5;
 
---Relatório 5: clientes com empréstimos ativos
+-- Relatório 5: clientes com empréstimos ativos
 SELECT clientes.nome AS cliente, COUNT(emprestimos.id) AS emprestimos_ativos
 FROM clientes
 INNER JOIN emprestimos ON emprestimos.cliente_id = clientes.id

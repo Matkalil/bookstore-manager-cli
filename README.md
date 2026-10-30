@@ -437,6 +437,7 @@ As tarefas foram organizadas no GitHub Projects, com as colunas To do, In progre
 | `feat/clientes` | Gerenciamento de clientes |
 | `feat/emprestimos` | Empréstimos, devoluções e bloqueio de remoções com vínculo |
 | `fix/revisao-geral` | Correções encontradas no teste geral |
+| `fix/ajustes-banco` | Correções no script SQL e no DER |
 | `docs/readme` | Escrita da documentação |
  
 ## Vídeo de apresentação
