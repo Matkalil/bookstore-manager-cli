@@ -96,7 +96,7 @@ INSERT INTO emprestimos (livro_id, cliente_id, data_emprestimo, data_devolucao) 
 
 -- Exemplo UPDATE: Atualiza telefone da cliente Celeste
 UPDATE clientes SET telefone = '(48) 99101-0007' WHERE id = 5;
---Exemplo DELETE: Deleta cliente Benedito. Cliente sem empréstimos, não interrompe script
+-- Exemplo DELETE: Deleta cliente Benedito. Cliente sem empréstimos, não interrompe script
 DELETE FROM clientes WHERE id = 6;
 
 -- =============================================

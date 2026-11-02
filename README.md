@@ -420,7 +420,7 @@ O `main.ts` cria os repositórios, os services e os controllers, entregando cada
  
 ## Organização do Kanban
  
-As tarefas foram organizadas no GitHub Projects, com as colunas To do, In progress,  e Done. Cada etapa foi registrada como Issue e fechada pelo Pull Request correspondente.
+As tarefas foram organizadas no GitHub Projects, com as colunas To do, In progress e Done. Cada etapa foi registrada como Issue e fechada pelo Pull Request correspondente.
  
 [Acessar o quadro Kanban](https://github.com/users/Matkalil/projects/6/views/1)
  
@@ -442,7 +442,7 @@ As tarefas foram organizadas no GitHub Projects, com as colunas To do, In progre
  
 ## Vídeo de apresentação
  
-Em breve.
+[Assistir ao vídeo](https://drive.google.com/file/d/1QZ8WCXd_rciNb-nBy2kFB3pdFl_RLSLP/view?usp=sharing)
  
 ## Melhorias futuras
  
@@ -453,6 +453,7 @@ Em breve.
 - Validar o CPF pelos dígitos verificadores
 - Criar testes automatizados
 - Atualizar dado específico sem a necessidade de atualizar todas as informações
+
 ## Integrantes
  
 - Mateus Kuhnen Kalil ([@Matkalil](https://github.com/Matkalil))
