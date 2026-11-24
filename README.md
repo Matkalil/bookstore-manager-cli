@@ -1,5 +1,39 @@
 # BookStore Manager CLI
+## English
  
+**BookStore Manager CLI** is a terminal application that manages a small bookstore: authors, books, customers and book loans. Interactive menus drive every operation, and business rules keep the data consistent: a book must belong to an existing author, a loan only happens when a copy is available, and records with links (an author with books, a customer with loans) cannot be removed.
+ 
+The bookstore's relational database was designed as an ERD and implemented in PostgreSQL (`database/script.sql`), with tables, constraints, sample data and management reports. The application itself runs on in-memory data loaded from a seed; the database script runs separately in PostgreSQL.
+ 
+**Highlights**
+ 
+- Layered architecture: models, a generic in-memory repository (`RepositorioEmMemoria<T>`), services with the business rules, controllers and reusable menus, wired together with dependency injection
+- Validation of dates, e-mail, CPF (Brazilian tax ID), publication year and stock quantities; unique ISBN, e-mail and CPF
+- PostgreSQL schema with primary and foreign keys, `NOT NULL`, `UNIQUE` and `CHECK` constraints, mirrored by the application's rules
+- 5 SQL reports using `INNER JOIN`, `LEFT JOIN`, `GROUP BY`, `COUNT`, `ORDER BY` and `LIMIT`
+- Git Flow workflow with one pull request per feature, release tags (v1.0.0 and v1.0.1) and a Kanban board on GitHub Projects
+**Tech stack:** Node.js · TypeScript · tsx · PostgreSQL · dbdiagram.io · Prettier
+ 
+**Run it**
+ 
+```bash
+git clone https://github.com/Matkalil/bookstore-manager-cli.git
+cd bookstore-manager-cli
+npm install
+npm run dev
+```
+ 
+To create the database (PostgreSQL required):
+ 
+```bash
+psql -U postgres -c "CREATE DATABASE bookstore;"
+psql -U postgres -d bookstore -f database/script.sql
+```
+ 
+Built for SENAI's Carreira Tech back-end program (Module 1). The full documentation below is in Portuguese.
+ 
+---
+## Português
 Sistema de gerenciamento de livraria com Node.js e TypeScript, executado pelo terminal, com banco de dados modelado em PostgreSQL.
  
 ## Sobre o projeto
